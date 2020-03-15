@@ -1,0 +1,20 @@
+.form {
+    max-width: 400px;
+    float: none;
+    margin: auto;
+    border-style: solid;
+    border-width: 1px;
+    /* border-radius: 10px; */
+    border-color:lightblue;
+    padding: 10px;
+    font-size:15px;
+}
+
+.login-container {
+    margin-top: 20vh;
+}
+
+.google-login {
+    width: 200px;
+    margin-bottom: 10px;
+}
