@@ -16,6 +16,7 @@ export default class LogIn extends React.Component {
         }
         this.handleSubmit.bind(this);
         this.handleChange.bind(this);
+        google_api_key = `${process.env.GOOGLE_LOGIN_KEY}.apps.googleusercontent.com`
     }
 
     handleChange(event) {
@@ -66,7 +67,7 @@ export default class LogIn extends React.Component {
 
                             <Container className="mb-2 d-flex justify-content-center google-login">
                                 <GoogleLogin
-                                    clientId="1078777697294-rs9hoi1i8gr5vvqgeknvs0b67np62j8k.apps.googleusercontent.com"
+                                    clientId= {this.google_api_key}
                                     buttonText="Login"
                                     onSuccess={this.response}
                                     onFailure={this.response}
