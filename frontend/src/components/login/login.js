@@ -16,7 +16,7 @@ export default class LogIn extends React.Component {
         }
         this.handleSubmit.bind(this);
         this.handleChange.bind(this);
-        google_api_key = `${process.env.GOOGLE_LOGIN_KEY}.apps.googleusercontent.com`
+        this.google_api_key = `${process.env.GOOGLE_LOGIN_KEY}.apps.googleusercontent.com`
     }
 
     handleChange(event) {

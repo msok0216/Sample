@@ -28,7 +28,7 @@ export default class SignUp extends React.Component {
     async handleSubmit(event) {
         console.log(JSON.stringify(this.state));
         event.preventDefault();
-        const server_response = await fetch("REST", {
+        const server_response = await fetch("/signup", {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
