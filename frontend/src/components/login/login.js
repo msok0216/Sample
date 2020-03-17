@@ -14,8 +14,8 @@ export default class LogIn extends React.Component {
             id:"",
             pwd:""
         }
-        this.handleSubmit.bind(this);
-        this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.google_api_key = `${process.env.GOOGLE_LOGIN_KEY}.apps.googleusercontent.com`
     }
 
@@ -26,7 +26,8 @@ export default class LogIn extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        const server_response = await fetch("REST", {
+        const server_response = await fetch("/login", {
+            method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
@@ -40,9 +41,9 @@ export default class LogIn extends React.Component {
         return await server_response.json();
     }
 
-    response = (response) => {
-        console.log(response.profileObj)
-    }
+    // response = (response) => {
+    //     console.log(response.profileObj)
+    // }
 
     render() {
         return (
@@ -53,12 +54,12 @@ export default class LogIn extends React.Component {
                             <Container className="col-11 mt-3">
                                 <Form.Group controlId="loginId">
                                     <Form.Label>ID</Form.Label>
-                                    <Form.Control size="sm" type="text" placeholder="Enter Email" name="id"></Form.Control>
+                                    <Form.Control size="sm" type="text" placeholder="Enter Email" name="id" onChange={this.handleChange}></Form.Control>
                                 </Form.Group>
                                 
                                 <Form.Group controlId="loginPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control size="sm" type="password" placeholder="Enter Password" name="pwd"></Form.Control>
+                                    <Form.Control size="sm" type="password" placeholder="Enter Password" name="pwd" onChange={this.handleChange}></Form.Control>
                                 </Form.Group>
 
                                 <Button size="sm" variant="primary" type="submit">Log In</Button>
