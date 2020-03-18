@@ -28,7 +28,8 @@ def login():
         pwd_val = request_json['pwd']
         user = db.user.find_one({'id': id_val})
         if user:
-            if bcrypt.checkpw(user['pwd'], pwd_val):
+            # argument order matters here
+            if bcrypt.checkpw(bytes(pwd_val, encoding='utf-8'), bytes(user['pwd'], encoding='utf-8')):
                 access_token = create_access_token(identity = {
                     'id': user['id'],
                     'name': user['name'],
@@ -38,9 +39,9 @@ def login():
             else:
                 result = jsonify({'error': 'Invalid username and password'}), status.HTTP_401_UNAUTHORIZED
         else:
-            result = jsonify({'result': 'No users found'})        
+            result = jsonify({'result': 'No users found'}), status.HTTP_404_NOT_FOUND    
     return result
-    
+
 @auth.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
@@ -54,10 +55,10 @@ def signup():
         pwd2_val = request_json['pwd2']
         email_val = request_json['email']
         if pwd_val == pwd2_val and email_val:
-            hashed_pw = bcrypt.hashpw(pwd_val, os.environ.get('SALT'))
+            hashed_pw = bcrypt.hashpw(bytes(pwd_val, encoding='utf-8'), os.environ.get('SALT').encode('utf-8'))
             new_user = {"name": name_val,
                         "id": id_val,
-                        "pwd": hashed_pw,
+                        "pwd": hashed_pw.decode('utf-8'),
                         "email": email_val}
             db.get_collection('user').insert_one(new_user)
             user = db.get_collection('user').find_one({'id': id_val})

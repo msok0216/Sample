@@ -38,7 +38,14 @@ export default class LogIn extends React.Component {
             redirect: 'follow',
             body: JSON.stringify(this.state)
         })
-        return await server_response.json();
+        .then(response => {
+            localStorage.setItem('token', response.json['token'])
+            // TODO add redirect
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
     }
 
     // response = (response) => {
