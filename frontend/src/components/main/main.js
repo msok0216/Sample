@@ -14,8 +14,10 @@ export default class Main extends React.Component {
     <Navbar.Brand href="#home">Navbar</Navbar.Brand>
     <Nav className="mr-auto">
       <Nav.Link href="/main">Home</Nav.Link>
-      <Nav.Link href="/resource">Resource</Nav.Link>
+      <Nav.Link href="/resource">Explore</Nav.Link>
       <Nav.Link href="/forum">Forum</Nav.Link>
+      <Nav.Link href="/message">Message</Nav.Link>
+      <Nav.Link href="/resource">Resource</Nav.Link>
     </Nav>
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
